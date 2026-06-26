@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ular Tangga 50 - Game Papan Sederhana</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>ULAR TANGGA 50</h1>
+      <p>Mencapai kotak 50 pertama kali untuk menang!</p>
+    </header>
+
+    <!-- 1. MENU AWAL / SETUP SCREEN -->
+    <main id="setup-screen" class="setup-screen">
+      <h2 class="setup-title">Pengaturan Permainan</h2>
+      
+      <!-- Pilihan Jumlah Pemain -->
+      <div class="form-group">
+        <label class="form-label">Jumlah Pemain:</label>
+        <div class="player-selector" id="player-selector">
+          <button type="button" class="selector-btn active" data-count="2">2 Pemain</button>
+          <button type="button" class="selector-btn" data-count="3">3 Pemain</button>
+          <button type="button" class="selector-btn" data-count="4">4 Pemain</button>
+        </div>
+      </div>
+
+      <!-- Input Nama Pemain -->
+      <div class="form-group">
+        <label class="form-label">Nama Pemain:</label>
+        <div class="names-inputs" id="names-inputs-container">
+          <!-- Default 2 inputs (will be generated dynamically as well, but initialized here) -->
+          <div class="input-wrapper">
+            <span class="input-decor p1"></span>
+            <input type="text" class="player-name-input" id="p1-name" value="Pemain 1" placeholder="Nama Pemain 1" required>
+          </div>
+          <div class="input-wrapper">
+            <span class="input-decor p2"></span>
+            <input type="text" class="player-name-input" id="p2-name" value="Pemain 2" placeholder="Nama Pemain 2" required>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tombol Mulai Game -->
+      <button type="button" id="start-game-btn" class="btn-primary">Mulai Game</button>
+    </main>
+
+    <!-- 2. PAPAN PERMAINAN & KONTROL / GAME SCREEN -->
+    <main id="game-screen" class="game-layout hidden">
+      <!-- Kiri: Papan Permainan -->
+      <section class="board-container">
+        <div class="board-wrapper">
+          <svg class="board-svg" id="board-svg"></svg>
+          <div class="board-grid" id="board-grid">
+            <!-- Tiles generated dynamically via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Kanan: Panel Kontrol & Info -->
+      <section class="controls-container">
+        
+        <!-- Info Giliran -->
+        <div class="control-card turn-indicator">
+          <div class="active-indicator p1" id="current-player-indicator"></div>
+          <div class="turn-text">
+            Giliran: <span id="current-player-display" class="active-player-name">Pemain 1</span>
+          </div>
+        </div>
+
+        <!-- Tombol Lempar Dadu & Dadu -->
+        <div class="control-card dice-section">
+          <div class="die-container die" id="dice-visual" data-value="1">
+            <div class="die-dot dot-a"></div>
+            <div class="die-dot dot-b"></div>
+            <div class="die-dot dot-c"></div>
+            <div class="die-dot dot-d"></div>
+            <div class="die-dot dot-e"></div>
+            <div class="die-dot dot-f"></div>
+            <div class="die-dot dot-g"></div>
+          </div>
+          <div class="dice-result-text" id="dice-result-text">
+            Tekan tombol untuk melempar dadu
+          </div>
+          <button type="button" id="roll-dice-btn" class="btn-primary">Lempar Dadu</button>
+        </div>
+
+        <!-- Daftar Pemain & Posisi -->
+        <div class="control-card">
+          <h3 class="player-list-title">Posisi Pemain</h3>
+          <div class="player-status-list" id="player-status-list">
+            <!-- Player positions generated dynamically via JS -->
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- 3. POPUP KEMENANGAN / VICTORY MODAL -->
+  <div id="victory-modal" class="modal-overlay hidden">
+    <div class="winner-modal">
+      <div class="winner-emoji">🏆</div>
+      <h2>Selamat!</h2>
+      <div class="winner-name" id="winner-name-display">Pemain 1</div>
+      <p class="winner-message">Telah berhasil mencapai kotak 50 dan memenangkan permainan!</p>
+      <button type="button" id="play-again-btn" class="btn-primary">Main Lagi</button>
+    </div>
+  </div>
+
+  <!-- 4. POPUP PERTANYAAN / QUESTION MODAL -->
+  <div id="question-modal" class="modal-overlay hidden">
+    <div class="question-card">
+      <div class="question-header">
+        <span class="question-tag" id="question-type-tag">PERTANYAAN</span>
+        <h3 id="question-text">Pertanyaan akan muncul di sini...</h3>
+      </div>
+      <div class="options-container" id="options-container">
+        <!-- Opsi jawaban di-generate dinamis via JS -->
+      </div>
+      <div class="question-feedback hidden" id="question-feedback">
+        <p id="feedback-message">Jawaban Benar!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
